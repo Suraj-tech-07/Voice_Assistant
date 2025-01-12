@@ -17,8 +17,35 @@ recognition.onresult = (event) => {
     // console.log(event);
     // let current=event.resultIndex;
     let transcript = event.results[0][0].transcript;
+    // readOut(transcript);
+    var userInput = transcript.toLowerCase();
     console.log(transcript);
-    readOut(transcript);
+    var stringsToCheckGreetings = ["hii", "hello", "hey", "friday", "good", "hi"];
+    // var stringsToOpenWebs = ["open", "youtube"];
+    if (stringsToCheckGreetings.some(substring => userInput.includes(substring))) {
+        readOut("Hellow Sir, tell me what can i do for you ");
+    }
+
+    // Open Youtube and play song in youtube
+    if (userInput.includes("open youtube") || userInput.includes("start youtube")) {
+        readOut("Opening youtube, sir");
+        window.open("https://www.youtube.com/");
+    }
+
+    if (userInput.includes(" play ")) {
+        readOut("Playing music on youtube, sir ");
+        window.open("https://www.youtube.com/watch?v=1cjh7Gpwgzc");
+        console.log("opened");
+        recognition.stop();
+    }
+
+    // Open Google
+    if (userInput.includes("open google")) {
+        readOut("Opening youtube, sir");
+        window.open("https://www.google.com/");
+    }
+
+
 }
 
 
@@ -44,7 +71,7 @@ var readOut = (message) => {
     speech.text = message;
     // speech.rate = 1.7;
     speech.voice = allVoices[7];
-    speech.volume = 1;
+    // speech.volume = 1;
     window.speechSynthesis.speak(speech);
     console.log("Speaking out");
 }

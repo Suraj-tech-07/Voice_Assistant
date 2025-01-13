@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>
+        Hello World
+    </h1>
+</body>
+<script>
+
+    // Create a new utterance
+    let utterance = new SpeechSynthesisUtterance("Hello, this is a test!");
+    // Get the list of available voices
+    let voices = window.speechSynthesis.getVoices();
+    console.log(voices);
+    // Set the voice (e.g., the first available voice)
+    utterance.voice = voices[0];
+    console.log(utterance.voice);
+    // Speak the utterance
+    window.speechSynthesis.speak(utterance);
+
+</script>
+
+</html>

@@ -9,6 +9,7 @@ const recognition = new speechRecognition();
 // recognition.lang = 'hi-IN';
 
 recognition.onstart = function () {
+    readOut("Heyyy ,jimmy ,tell me what can i do for you");
     console.log("Recognition Activated");
 }
 
@@ -26,13 +27,13 @@ recognition.onresult = (event) => {
         readOut("Hellow Sir, tell me what can i do for you ");
     }
 
-    // Open Youtube and play song in youtube
+    // Open Youtube 
     if (userInput.includes("open youtube") || userInput.includes("start youtube")) {
         readOut("Opening youtube, sir");
         window.open("https://www.youtube.com/");
     }
-
-    if (userInput.includes(" play ")) {
+    // play song in youtube
+    if (userInput.includes("play music") || userInput.includes("start music ") || userInput.includes("play song ") || userInput.includes("start song ")) {
         readOut("Playing music on youtube, sir ");
         window.open("https://www.youtube.com/watch?v=1cjh7Gpwgzc");
         console.log("opened");
@@ -41,8 +42,16 @@ recognition.onresult = (event) => {
 
     // Open Google
     if (userInput.includes("open google")) {
-        readOut("Opening youtube, sir");
+        readOut("Opening Google, sir");
         window.open("https://www.google.com/");
+    }
+    // Google Search 
+    if (userInput.includes("search")) {
+        let userSearch = findQuery(userInput);
+        readOut(`Searching ${userSearch} on google`);
+        // setTimeout(() => {
+        window.open(`https://www.google.com/search?q=${userSearch}`);
+        // }, 1000);
     }
 
 
@@ -69,17 +78,28 @@ var readOut = (message) => {
     // different sound
     const allVoices = speechSynthesis.getVoices();
     speech.text = message;
-    // speech.rate = 1.7;
+    speech.rate = 0.9;
+    // speech.voice=
     speech.voice = allVoices[7];
     // speech.volume = 1;
+    speech.pitch = 1.2;
     window.speechSynthesis.speak(speech);
     console.log("Speaking out");
 }
 
-speakBtn.addEventListener("click", () => {
-    readOut("Heyyy ,jimmy ,tell me what can i do for you");
-});
+// speakBtn.addEventListener("click", () => {
+//     readOut("Heyyy ,jimmy ,tell me what can i do for you");
+// });
 
 window.onload = function () {
     readOut(" ");
+}
+
+
+
+// UserDefined Functions 
+var findQuery = (input) => {
+    let result = input.replace(/search|google|in|on/gi, "");
+    console.log(result);
+    return result;
 }

@@ -9,7 +9,7 @@ const recognition = new speechRecognition();
 // recognition.lang = 'hi-IN';
 
 recognition.onstart = function () {
-    readOut("Heyyy ,jimmy ,tell me what can i do for you");
+    // readOut("Heyyy ,jimmy ,tell me what can i do for you");
     console.log("Recognition Activated");
 }
 
@@ -39,6 +39,13 @@ recognition.onresult = (event) => {
         console.log("opened");
         recognition.stop();
     }
+    // Youtube Search
+    // if (userInput.includes("search youtube")) {
+    //     let userSearch = findQuery(userInput);
+    //     readOut(`Searching ${userSearch} on youtube`);
+    //     // setTimeout(() => {
+    //     window.open(`https://www.google.com/search?q=${userSearch}`);
+    // }
 
     // Open Google
     if (userInput.includes("open google")) {
@@ -55,8 +62,8 @@ recognition.onresult = (event) => {
     }
 
 
-}
 
+}
 
 recognition.onend = () => {
     console.log("Recognition Deactivated");
@@ -99,7 +106,147 @@ window.onload = function () {
 
 // UserDefined Functions 
 var findQuery = (input) => {
-    let result = input.replace(/search|google|in|on/gi, "");
+    let result = input.replace(/search|google|youtube|in|on/gi, "");
     console.log(result);
     return result;
 }
+
+
+
+
+// Elements
+// const startBtn = document.querySelector("#start");
+// const endBtn = document.querySelector("#stop");
+
+// const speechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+// const recognition = new speechRecognition();
+
+// // Recognition settings
+// recognition.continuous = true; // Keeps recognition active for multiple commands
+// recognition.interimResults = false;
+
+// recognition.onstart = () => {
+//     console.log("Recognition Activated");
+// };
+
+// recognition.onresult = (event) => {
+//     let transcript = event.results[0][0].transcript.toLowerCase();
+//     console.log("User said:", transcript);
+
+//     // Pause recognition while processing command
+//     recognition.stop();
+
+//     processCommand(transcript);
+// };
+
+// // Restart recognition when it stops
+// recognition.onend = () => {
+//     console.log("Recognition Deactivated");
+//     // Automatically restart unless explicitly stopped
+//     if (!manualStop) {
+//         recognition.start();
+//     }
+// };
+
+// let manualStop = false;
+
+// startBtn.addEventListener("click", () => {
+//     manualStop = false;
+//     recognition.start();
+//     console.log("Started Listening");
+// });
+
+// endBtn.addEventListener("click", () => {
+//     manualStop = true;
+//     recognition.stop();
+//     console.log("Stopped Listening");
+// });
+
+// // Assistant Speech
+// const readOut = (message, callback) => {
+//     const speech = new SpeechSynthesisUtterance(message);
+//     const allVoices = window.speechSynthesis.getVoices();
+
+//     if (allVoices.length > 0) {
+//         speech.voice = allVoices[0]; // Use the first voice as a fallback
+//     }
+
+//     speech.rate = 0.9;
+//     speech.pitch = 1.2;
+
+//     speech.onend = () => {
+//         console.log("Finished speaking:", message);
+//         if (callback) callback();
+//     };
+
+//     window.speechSynthesis.speak(speech);
+//     console.log("Speaking:", message);
+// };
+
+// // Process Commands
+// const processCommand = (transcript) => {
+//     const greetings = ["hii", "hello", "hey", "friday", "good", "hi"];
+//     if (greetings.some((word) => transcript.includes(word))) {
+//         readOut("Hello Sir, tell me what I can do for you.", () => {
+//             recognition.start(); // Resume listening
+//         });
+//         return;
+//     }
+
+//     if (transcript.includes("open youtube") || transcript.includes("start youtube")) {
+//         readOut("Opening YouTube, Sir.", () => {
+//             window.open("https://www.youtube.com/");
+//             recognition.start();
+//         });
+//         return;
+//     }
+
+//     if (
+//         transcript.includes("play music") ||
+//         transcript.includes("start music") ||
+//         transcript.includes("play song") ||
+//         transcript.includes("start song")
+//     ) {
+//         readOut("Playing music on YouTube, Sir.", () => {
+//             window.open("https://www.youtube.com/watch?v=1cjh7Gpwgzc");
+//             recognition.start();
+//         });
+//         return;
+//     }
+
+//     if (transcript.includes("open google")) {
+//         readOut("Opening Google, Sir.", () => {
+//             window.open("https://www.google.com/");
+//             recognition.start();
+//         });
+//         return;
+//     }
+
+//     if (transcript.includes("search")) {
+//         let userSearch = findQuery(transcript);
+//         readOut(`Searching ${userSearch} on Google.`, () => {
+//             window.open(`https://www.google.com/search?q=${userSearch}`);
+//             recognition.start();
+//         });
+//         return;
+//     }
+
+//     // Fallback response
+//     readOut("I didn't understand that. Could you please repeat?", () => {
+//         recognition.start();
+//     });
+// };
+
+// // Helper Functions
+// const findQuery = (input) => {
+//     return input.replace(/search|google|youtube|in|on/gi, "").trim();
+// };
+
+// // Ensure voices are loaded
+// window.speechSynthesis.onvoiceschanged = () => {
+//     console.log("Voices Loaded");
+// };
+
+// window.onload = () => {
+//     readOut("Hey, I am ready to assist you!");
+// };
